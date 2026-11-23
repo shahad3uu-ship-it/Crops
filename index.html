@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CROPS Café | إدارة المقهى</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><span class="brand-mark">✳</span><div><b>CROPS</b><small>COFFEE & DAILY</small></div></div>
+  <div class="profile"><div class="avatar">C</div><div><b>مدير المقهى</b><small>مسؤول النظام</small></div><span class="online"></span></div>
+  <p class="nav-label">القائمة الرئيسية</p>
+  <nav>
+    <button class="nav-item active" data-page="dashboard"><span>▦</span> نظرة عامة</button>
+    <button class="nav-item" data-page="orders"><span>▤</span> الطلبات <i id="nav-count">4</i></button>
+    <button class="nav-item" data-page="products"><span>◈</span> المنتجات</button>
+    <button class="nav-item" data-page="inventory"><span>▧</span> المخزون</button>
+    <button class="nav-item" data-page="employees"><span>♙</span> الموظفون</button>
+    <button class="nav-item" data-page="reports"><span>▥</span> التقارير</button>
+  </nav>
+  <div class="sidebar-bottom"><div class="help-icon">?</div><div><b>تحتاج مساعدة؟</b><small>مركز المساعدة</small></div></div>
+</aside>
+<main class="main">
+  <header class="topbar"><div><span class="eyebrow">الأحد، 23 نوفمبر 2026</span><h1 id="page-title">صباح الخير، مدير المقهى <span>☀️</span></h1><p>إليك ملخص أداء CROPS اليوم.</p></div><div class="top-actions"><button class="icon-btn" title="الإشعارات">♧<em></em></button><button class="user-chip"><span class="avatar small">C</span> حسابي⌄</button></div></header>
+  <section id="dashboard" class="page active">
+    <div class="section-heading"><div><h2>نظرة عامة</h2><p>تابع أهم مؤشرات المقهى في مكان واحد.</p></div><button class="primary" data-go="orders">＋ طلب جديد</button></div>
+    <div class="stats">
+      <article class="stat-card"><div class="stat-top"><span>إجمالي المبيعات</span><b class="stat-icon mint">ر.س</b></div><strong>2,840 <small>ر.س</small></strong><p class="positive">↑ 12.8% <span>مقارنة بالأمس</span></p></article>
+      <article class="stat-card"><div class="stat-top"><span>الطلبات اليوم</span><b class="stat-icon peach">▤</b></div><strong id="orders-total">48</strong><p class="positive">↑ 8.2% <span>مقارنة بالأمس</span></p></article>
+      <article class="stat-card"><div class="stat-top"><span>متوسط قيمة الطلب</span><b class="stat-icon lilac">◉</b></div><strong>59.2 <small>ر.س</small></strong><p class="positive">↑ 4.5% <span>مقارنة بالأمس</span></p></article>
+      <article class="stat-card"><div class="stat-top"><span>منتجات منخفضة</span><b class="stat-icon yellow">!</b></div><strong id="low-stock-total">3</strong><p class="warning">تحتاج إلى إعادة طلب</p></article>
+    </div>
+    <div class="content-grid">
+      <article class="panel sales-panel"><div class="panel-head"><div><h3>ملخص المبيعات</h3><p>أداء المبيعات خلال الأسبوع</p></div><select><option>هذا الأسبوع</option><option>هذا الشهر</option></select></div><div class="chart"><div class="y-labels"><span>3,000</span><span>2,000</span><span>1,000</span><span>0</span></div><div class="bars"><div style="--h:48%"><i></i><small>السبت</small></div><div style="--h:72%"><i></i><small>الأحد</small></div><div style="--h:58%"><i></i><small>الاثنين</small></div><div style="--h:88%"><i></i><small>الثلاثاء</small></div><div style="--h:66%"><i></i><small>الأربعاء</small></div><div style="--h:95%"><i></i><small>الخميس</small></div><div style="--h:76%"><i></i><small>الجمعة</small></div></div></div></article>
+      <article class="panel"><div class="panel-head"><div><h3>الأكثر مبيعًا</h3><p>حسب عدد الطلبات</p></div><button class="text-btn" data-go="products">عرض الكل</button></div><div class="best-list"><div><span class="food coffee">☕</span><p><b>آيس سبانش لاتيه</b><small>86 طلب</small></p><strong>1,290 ر.س</strong></div><div><span class="food matcha">🍵</span><p><b>آيس ماتشا</b><small>64 طلب</small></p><strong>960 ر.س</strong></div><div><span class="food pastry">🥐</span><p><b>كرواسون زبدة</b><small>42 طلب</small></p><strong>420 ر.س</strong></div></div></article>
+    </div>
+    <article class="panel recent"><div class="panel-head"><div><h3>أحدث الطلبات</h3><p>آخر الطلبات المسجلة في النظام</p></div><button class="text-btn" data-go="orders">كل الطلبات ←</button></div><div class="table-wrap"><table><thead><tr><th>رقم الطلب</th><th>العميل</th><th>المنتجات</th><th>الإجمالي</th><th>الحالة</th></tr></thead><tbody id="recent-orders"></tbody></table></div></article>
+  </section>
+  <section id="orders" class="page"><div class="section-heading"><div><h2>الطلبات</h2><p>إدارة ومتابعة طلبات العملاء.</p></div><button class="primary" id="add-order">＋ إضافة طلب تجريبي</button></div><article class="panel"><div class="panel-head"><h3>كل الطلبات</h3><span class="pill">اليوم</span></div><div class="table-wrap"><table><thead><tr><th>رقم الطلب</th><th>العميل</th><th>المنتجات</th><th>الإجمالي</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="orders-table"></tbody></table></div></article></section>
+  <section id="products" class="page"><div class="section-heading"><div><h2>المنتجات</h2><p>قائمة المشروبات والمأكولات وأسعارها.</p></div><button class="primary" id="add-product">＋ إضافة منتج</button></div><div class="product-grid" id="product-grid"></div></section>
+  <section id="inventory" class="page"><div class="section-heading"><div><h2>المخزون</h2><p>راقب الكميات ونبّه الفريق عند انخفاضها.</p></div><button class="primary" id="add-stock">＋ تحديث المخزون</button></div><article class="panel"><div class="table-wrap"><table><thead><tr><th>المادة</th><th>الكمية الحالية</th><th>حد التنبيه</th><th>الحالة</th></tr></thead><tbody id="stock-table"></tbody></table></div></article></section>
+  <section id="employees" class="page"><div class="section-heading"><div><h2>الموظفون</h2><p>فريق CROPS ومعلومات المناوبات.</p></div><button class="primary" id="add-employee">＋ إضافة موظف</button></div><div class="employee-grid" id="employee-grid"></div></section>
+  <section id="reports" class="page"><div class="section-heading"><div><h2>التقارير</h2><p>قراءة سريعة لأداء المقهى.</p></div><button class="primary" onclick="window.print()">طباعة التقرير</button></div><div class="stats"><article class="stat-card"><span>مبيعات الأسبوع</span><strong>16,420 <small>ر.س</small></strong><p class="positive">↑ 9.4%</p></article><article class="stat-card"><span>إجمالي الطلبات</span><strong>312</strong><p>هذا الأسبوع</p></article><article class="stat-card"><span>أفضل يوم</span><strong>الخميس</strong><p>3,120 ر.س</p></article></div><article class="panel report-note"><h3>ملاحظة الأداء</h3><p>المشروبات الباردة تمثل النسبة الأكبر من الطلبات. يُنصح بمراجعة مخزون الحليب والبن قبل نهاية الأسبوع.</p></article></section>
+  <footer>© 2026 CROPS Café <span>صُنع بشغف للقهوة والتفاصيل.</span></footer>
+</main><script src="app.js"></script>
+</body></html>

@@ -1,0 +1,21 @@
+const orders=[
+{id:"#CR-1048",name:"نورة أحمد",items:"آيس سبانش لاتيه، كوكيز",total:"48 ر.س",status:"مكتمل",cls:"done"},
+{id:"#CR-1047",name:"سارة محمد",items:"آيس ماتشا",total:"25 ر.س",status:"قيد التحضير",cls:"making"},
+{id:"#CR-1046",name:"ريم خالد",items:"فلات وايت، كرواسون",total:"38 ر.س",status:"بانتظار التأكيد",cls:"pending"},
+{id:"#CR-1045",name:"جود علي",items:"V60، براونيز",total:"42 ر.س",status:"مكتمل",cls:"done"}];
+const products=[["آيس سبانش لاتيه","مشروبات باردة","☕","15 ر.س"],["آيس ماتشا","مشروبات باردة","🍵","15 ر.س"],["فلات وايت","قهوة ساخنة","🥛","14 ر.س"],["V60","قهوة مختصة","🫖","18 ر.س"],["كرواسون زبدة","مخبوزات","🥐","10 ر.س"],["براونيز","حلويات","🍫","12 ر.س"]];
+let stock=[["حبوب القهوة","2.5 كجم","5 كجم"],["حليب","8 لتر","5 لتر"],["أكواب ورقية","120 حبة","100 حبة"],["شراب الفانيلا","1 عبوة","2 عبوة"],["مسحوق الماتشا","0.5 كجم","1 كجم"]];
+let staff=[["أحمد","باريستا","صباحية"],["لمى","كاشير","مسائية"],["فيصل","مشرف","صباحية"]];
+function rows(){return orders.map(o=>`<tr><td>${o.id}</td><td>${o.name}</td><td>${o.items}</td><td>${o.total}</td><td><span class="status ${o.cls}">${o.status}</span></td></tr>`).join("")}
+function renderOrders(){document.querySelector("#orders-table").innerHTML=orders.map((o,i)=>`<tr><td>${o.id}</td><td>${o.name}</td><td>${o.items}</td><td>${o.total}</td><td><span class="status ${o.cls}">${o.status}</span></td><td><button class="text-btn" onclick="nextStatus(${i})">تحديث الحالة</button></td></tr>`).join("");document.querySelector("#recent-orders").innerHTML=rows();document.querySelector("#nav-count").textContent=orders.filter(o=>o.cls!=="done").length}
+function nextStatus(i){const s=[["قيد التحضير","making"],["مكتمل","done"]];let n=s.findIndex(x=>x[1]===orders[i].cls);orders[i].status=s[Math.min(n+1,1)][0];orders[i].cls=s[Math.min(n+1,1)][1];renderOrders()}
+function renderProducts(){document.querySelector("#product-grid").innerHTML=products.map(p=>`<article class="product-card"><div class="product-emoji">${p[2]}</div><h3>${p[0]}</h3><p>${p[1]}</p><strong>${p[3]}</strong></article>`).join("")}
+function renderStock(){document.querySelector("#stock-table").innerHTML=stock.map(s=>{let low=parseFloat(s[1])<parseFloat(s[2]);return `<tr><td>${s[0]}</td><td>${s[1]}</td><td>${s[2]}</td><td><span class="status ${low?'pending':'done'}">${low?'مخزون منخفض':'متوفر'}</span></td></tr>`}).join("");document.querySelector("#low-stock-total").textContent=stock.filter(s=>parseFloat(s[1])<parseFloat(s[2])).length}
+function renderStaff(){document.querySelector("#employee-grid").innerHTML=staff.map(s=>`<article class="employee-card"><div class="avatar">${s[0][0]}</div><div><b>${s[0]}</b><p>${s[1]} · الفترة ${s[2]}</p></div></article>`).join("")}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===id));const names={dashboard:"صباح الخير، مدير المقهى ☀️",orders:"إدارة الطلبات",products:"قائمة المنتجات",inventory:"إدارة المخزون",employees:"فريق العمل",reports:"التقارير والتحليلات"};document.querySelector("#page-title").textContent=names[id]}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.page)));document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>showPage(b.dataset.go)));
+document.querySelector("#add-order").onclick=()=>{let n=orders.length+1045;orders.unshift({id:"#CR-"+n,name:"عميل جديد",items:"آيس سبانش لاتيه",total:"15 ر.س",status:"بانتظار التأكيد",cls:"pending"});renderOrders();document.querySelector("#orders-total").textContent=48+orders.length-4};
+document.querySelector("#add-product").onclick=()=>{let name=prompt("اسم المنتج الجديد:");if(name){let price=prompt("السعر بالريال:")||"0";products.push([name,"منتج جديد","🥤",price+" ر.س"]);renderProducts()}};
+document.querySelector("#add-stock").onclick=()=>{let name=prompt("اسم المادة:");if(name){let qty=prompt("الكمية الحالية:")||"0";let limit=prompt("حد التنبيه:")||"1";stock.push([name,qty,limit]);renderStock()}};
+document.querySelector("#add-employee").onclick=()=>{let name=prompt("اسم الموظف:");if(name){staff.push([name,prompt("المسمى الوظيفي:")||"موظف",prompt("الفترة:")||"صباحية"]);renderStaff()}};
+renderOrders();renderProducts();renderStock();renderStaff();
